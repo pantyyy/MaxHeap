@@ -11,6 +11,20 @@ public class MaxHeap<E extends Comparable<E>> {
         data = new Array<>(capacity);
     }
 
+
+    //传入一个数组 , 将这个数组进行最大堆化
+    //方法1 : 将这个数组中的每个元素放入这个堆中 ,调用add()方法
+    //方法2 : 从第一个非叶子节点开始 , 进行下沉操作 , 直到最大的那个元素
+    public MaxHeap(E[] arr){
+        data = new Array<>(arr);
+        //如果定位第一个非叶子节点?
+        //第一个非叶子节点 = 最后一个节点的父节点
+        for(int i = parent(data.getSize() - 1) ; i >= 0 ; i--){
+            siftDown(i);
+        }
+    }
+
+
     //不知道容量
     public MaxHeap(){
         data = new Array<>();
@@ -113,6 +127,27 @@ public class MaxHeap<E extends Comparable<E>> {
             }
         }
     }
+
+
+    //取出堆中最大的元素 , 并把元素e加入堆中
+    //方法1 : 调用extractMax()方法取出最大元素 , 然后调用add()方法加入堆中
+    //这种方法进行了两次logn的操作
+
+    //方法2 : 找到最大元素 , 也就是索引为0的元素 , 进行替换 , 然后在进行下浮操作
+    public E replace(E e){
+        //1.找到最大的元素
+        E ret = findMax();
+        //2.把最大元素替换为e
+        data.set(0 , e);
+        //3.进行下沉操作
+        siftDown(0);
+        //4.返回最大元素
+        return ret;
+    }
+
+
+
+
 
 
 }

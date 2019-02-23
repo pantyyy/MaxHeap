@@ -15,6 +15,17 @@ public class Array<E> {
         this(10);
     }
 
+    //用户传入的是一个数组
+    public Array(E[] arr){
+        //创建传入大小的数组
+        data = (E []) new Object[arr.length];
+        for(int i = 0 ; i < arr.length ; i++){
+            data[i] = arr[i];
+        }
+
+        size = arr.length;
+    }
+
     //交换值
     public void swap(int i, int j){
 
